@@ -1,0 +1,13 @@
+*
+!.gitignore
+!Makefile
+!*.c
+!*.h
+!srcs
+!includes
+!auto_test.sh
+!tests
+!tests/**
+!libs
+!libs/.gitkeep
+sharedlib.c
