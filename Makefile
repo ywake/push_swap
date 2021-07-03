@@ -5,7 +5,7 @@ CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBFT	:= ./libs/libft.a
 LIBS	:= -L. -lft
 SRCDIR	:= ./srcs/
-SRCS	:= main.c input.c error.c
+SRCS	:= main.c input.c error.c stack.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 BONUSFLG:= .bonus_flg
 
@@ -40,11 +40,12 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette srcs includes Libft tests/*/test.c | grep -v ": OK!" \
-	|| printf "\e[32m%s\n\e[m" "Norm OK!"
+	@printf "\e[31m"; norminette srcs includes Libft tests/*/test.c | grep -v ": OK!" \
+	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
 test: $(OBJS) $(LIBFT)
 	$(CC) $(LIBS) $(OBJS) ./tests/sharedlib.c -o $(NAME)
 
 autotest: test
-	bash auto_test.sh $(TEST)
+	bash auto_test.sh $(TEST)\
+	&& $(MAKE) norm
