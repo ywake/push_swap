@@ -13,6 +13,7 @@ function testfunc() {
 	RTN=$(($RTN | $?))
 }
 
+testfunc "./a.out 1" "1\n"
 testfunc "./a.out 1 2 3" "1\n2\n3\n"
 testfunc "./a.out 1 2147483647 3" "1\n2147483647\n3\n"
 testfunc "./a.out 1 -2147483648 3" "1\n-2147483648\n3\n"

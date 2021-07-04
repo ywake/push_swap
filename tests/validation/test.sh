@@ -1,6 +1,7 @@
 FLG=0
 
 array=(
+	"./push_swap"
 	"./push_swap \"\""
 	"./push_swap 1 2 three"
 	"./push_swap 1 2 3three"

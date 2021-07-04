@@ -40,7 +40,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	@printf "\e[31m"; norminette srcs includes Libft tests/*/test.c | grep -v ": OK!" \
+	@printf "\e[31m"; norminette srcs includes Libft tests/*/test.c tests/*/*/test.c | grep -v ": OK!" \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
 test: $(OBJS) $(LIBFT)

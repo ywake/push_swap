@@ -2,18 +2,6 @@
 
 #include "error.h"
 
-t_stack	*new_stack(t_list *list)
-{
-	t_stack	*stack;
-
-	stack = (t_stack *)malloc(sizeof(t_stack *));
-	if (stack == NULL)
-		error();
-	stack->top = &list;
-	// stack->bottom = &(ft_lstlast(list));
-	return (stack);
-}
-
 void	add_cmd(t_list **cmd, char *str, char *stack_name)
 {
 	char	*join;
@@ -64,4 +52,18 @@ void	st_rotate(t_list **cmd, t_stack *stack)
 	tmp->next = NULL;
 	ft_lstadd_back(stack->top, tmp);
 	add_cmd(cmd, "r", stack->name);
+}
+
+void	st_rrotate(t_list **cmd, t_stack *stack)
+{
+	t_list	*last1;
+	t_list	*last2;
+
+	if (*stack->top == NULL || (*stack->top)->next == NULL)
+		return ;
+	last2 = ft_lst_at(*stack->top, stack->len - 2);
+	last1 = last2->next;
+	last2->next = NULL;
+	ft_lstadd_front(stack->top, last1);
+	add_cmd(cmd, "rr", stack->name);
 }
