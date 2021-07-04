@@ -37,3 +37,16 @@ void	st_swap(t_list **cmd, t_stack *stack)
 	(*stack->top)->next->content = tmp;
 	add_cmd(cmd, "s", stack->name);
 }
+
+void	st_push(t_list **cmd, t_stack *dst, t_stack *src)
+{
+	t_list	*tmp;
+
+	if (*src->top == NULL)
+		return ;
+	tmp = (*src->top)->next;
+	(*src->top)->next = NULL;
+	ft_lstadd_front(dst->top, *src->top);
+	*src->top = tmp;
+	add_cmd(cmd, "p", dst->name);
+}
