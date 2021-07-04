@@ -52,3 +52,16 @@ void	st_push(t_list **cmd, t_stack *dst, t_stack *src)
 	dst->len++;
 	add_cmd(cmd, "p", dst->name);
 }
+
+void	st_rotate(t_list **cmd, t_stack *stack)
+{
+	t_list	*tmp;
+
+	if (*stack->top == NULL || (*stack->top)->next == NULL)
+		return ;
+	tmp = *stack->top;
+	*stack->top = (*stack->top)->next;
+	tmp->next = NULL;
+	ft_lstadd_back(stack->top, tmp);
+	add_cmd(cmd, "r", stack->name);
+}
