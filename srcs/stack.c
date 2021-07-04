@@ -48,5 +48,7 @@ void	st_push(t_list **cmd, t_stack *dst, t_stack *src)
 	(*src->top)->next = NULL;
 	ft_lstadd_front(dst->top, *src->top);
 	*src->top = tmp;
+	src->len--;
+	dst->len++;
 	add_cmd(cmd, "p", dst->name);
 }

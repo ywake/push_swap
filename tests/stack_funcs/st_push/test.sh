@@ -12,8 +12,8 @@ function testfunc() {
 	RTN=$(($RTN | $?))
 }
 
-testfunc "./a.out 1 2 3" "2\n3\n-\n1\n"
-testfunc "./a.out 1" "-\n1\n"
+testfunc "./a.out 1 2 3" "2\n3\nlen:2\n-\n1\nlen:1\n"
+testfunc "./a.out 1" "len:0\n-\n1\nlen:1\n"
 
 rm a.out
 exit $RTN

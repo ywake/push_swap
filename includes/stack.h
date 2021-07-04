@@ -6,8 +6,8 @@
 typedef struct s_stack
 {
 	char	*name;
+	int		len;
 	t_list	**top;
-	t_list	**bottom;
 }	t_stack;
 
 t_stack	*new_stack(t_list *list);
