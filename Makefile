@@ -5,7 +5,7 @@ CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBFT	:= ./libs/libft.a
 LIBS	:= -L. -lft
 SRCDIR	:= ./srcs/
-SRCS	:= main.c input.c error.c stack.c
+SRCS	:= main.c input.c error.c stack.c push_swap.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 BONUSFLG:= .bonus_flg
 
