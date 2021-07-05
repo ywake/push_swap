@@ -28,20 +28,19 @@ int	main(int argc, char *argv[])
 	t_stack	stack_b;
 
 	cmd = NULL;
-	list_a = make_data(argc, argv);
-	stack_a.top = &list_a;
+	stack_a.top = make_data(argc, argv);
 	stack_a.name = "a";
 	stack_a.len = argc - 1;
-	list_b = NULL;
-	stack_b.top = &list_b;
+	stack_b.top = NULL;
 	stack_b.name = "b";
 	stack_b.len = 0;
 	st_push(&cmd, &stack_a, &stack_b);
 	st_push(&cmd, &stack_b, &stack_a);
+	st_push(&cmd, &stack_b, &stack_a);
 	ft_lstiter(cmd, print_str);
-	ft_lstiter(*stack_a.top, print_num);
+	ft_lstiter(stack_a.top, print_num);
 	print_len(&stack_a);
 	ft_putendl_fd("-", 1);
-	ft_lstiter(*stack_b.top, print_num);
+	ft_lstiter(stack_b.top, print_num);
 	print_len(&stack_b);
 }

@@ -7,7 +7,7 @@ typedef struct s_stack
 {
 	char	*name;
 	int		len;
-	t_list	**top;
+	t_list	*top;
 }	t_stack;
 
 void	st_swap(t_list **cmd, t_stack *stack);
