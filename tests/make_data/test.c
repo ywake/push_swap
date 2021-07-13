@@ -1,11 +1,12 @@
 #include "push_swap.h"
 
 #include "libft.h"
+#include "data.h"
 #include <stdio.h>
 
-void	print(void *num)
+void	print(void *data)
 {
-	ft_putnbr_fd(*(int *)num, 1);
+	ft_putnbr_fd(((t_data *)data)->val, 1);
 	ft_putendl_fd("", 1);
 }
 

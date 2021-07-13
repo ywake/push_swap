@@ -1,122 +1,110 @@
 #include "push_swap.h"
 
+#include "data.h"
 #include "stack.h"
-#include "logging.h"
+#include "debug.h"
+#include <stdio.h>
 
-void	b_to_a(t_list **cmd, t_stack *sta, t_stack *stb, int range);
+void	merge_to_b(t_list **cmd, t_stack *sta, t_stack *stb);
 
-int	cmp(int *a, int *b)
+void	head_swap(t_list **cmd, t_stack	*stack)
 {
-	return (*a - *b);
+	((t_data *)stack->top->content)->is_start = false;
+	if (stack->top->next && !is_start(stack->top->next) \
+			&& get_value(stack->top) > get_value(stack->top->next))
+		st_swap(cmd, stack);
 }
 
-void	print_num(void *num)
+void	merge_to_a(t_list **cmd, t_stack *sta, t_stack *stb)
 {
-	ft_putnbr_fd(*(int *)num, 2);
-	ft_putstr_fd(" ", 2);
-}
+	bool	started;
 
-void put_stack(t_stack *sta, t_stack *stb)
-{
-	// if (1)
-	// 	return;
-	ft_putstr_fd(CYAN"sta: ", 2);
-	ft_lstiter(sta->top, print_num);
-	ft_putendl_fd("", 2);
-	ft_putstr_fd("stb: ", 2);
-	ft_lstiter(stb->top, print_num);
-	ft_putendl_fd("\n---"END, 2);
-}
-
-int	get_pivot(t_stack *stack, int range)
-{
-	t_list	*sorted;
-	t_list	*median_elem;
-	int		median;
-
-	sorted = ft_lstndup(stack->top, range);
-	ft_lst_sort(&sorted, cmp);
-	median_elem = ft_lst_at(sorted, range / 2 + range % 2 - 1);
-	median = *(int *)median_elem->content;
-	ft_lstclear(&sorted, free);
-	return (median);
-}
-
-void	a_to_b(t_list **cmd, t_stack *sta, t_stack *stb, int range)
-{
-	int	pivot;
-	int	ra;
-	int	pb;
-
-	if (range == 1)
+	if (!stb->top)
 		return ;
-	pivot = get_pivot(sta, range);
-	ra = 0;
-	pb = 0;
-	while (range--)
+	if (sta->top)
+		head_swap(cmd, sta);
+	head_swap(cmd, stb);
+	started = false;
+	while ((sta->top && !is_start(sta->top)) \
+			|| (stb->top && !is_start(stb->top)))
 	{
-		if (*(int *)sta->top->content > pivot)
-		{
-			st_rotate(cmd, sta);
-			ra++;
-		}
-		else
-		{
-			st_push(cmd, stb, sta);
-			pb++;
-		}
-	}
-	range = 0;
-	while (range++ < ra)
-		st_rrotate(cmd, sta);
-	put_stack(sta, stb);
-	a_to_b(cmd, sta, stb, ra);
-	b_to_a(cmd, sta, stb, pb);
-}
-
-void	b_to_a(t_list **cmd, t_stack *sta, t_stack *stb, int range)
-{
-	int	pivot;
-	int	rb;
-	int	pa;
-
-	if (range == 1)
-	{
-		st_push(cmd, sta, stb);
-		return ;
-	}
-	pivot = get_pivot(stb, range);
-	rb = 0;
-	pa = 0;
-	while (range--)
-	{
-		if (*(int *)stb->top->content > pivot)
-		{
+		if (sta->top == NULL || is_start(sta->top))
 			st_push(cmd, sta, stb);
-			pa++;
-		}
-		else
+		else if (stb->top == NULL || is_start(stb->top))
+			;
+		else if (get_value(sta->top) > get_value(stb->top))
+			st_push(cmd, sta, stb);
+		if (started == false)
 		{
-			st_rotate(cmd, stb);
-			rb++;
+			((t_data *)sta->top->content)->is_start = true;
+			started = true;
 		}
+		st_rotate(cmd, sta);
 	}
-	range = 0;
-	while (range++ < rb)
-		st_rrotate(cmd, stb);
-	put_stack(sta, stb);
-	a_to_b(cmd, sta, stb, pa);
-	b_to_a(cmd, sta, stb, rb);
+	merge_to_b(cmd, sta, stb);
+}
+
+void	merge_to_b(t_list **cmd, t_stack *sta, t_stack *stb)
+{
+	bool	started;
+
+	if (!sta->top || !stb->top)
+		return ;
+	head_swap(cmd, sta);
+	head_swap(cmd, stb);
+	started = false;
+	while ((sta->top && !is_start(sta->top)) \
+			|| (stb->top && !is_start(stb->top)))
+	{
+		if (stb->top == NULL || is_start(stb->top))
+			st_push(cmd, stb, sta);
+		else if (sta->top == NULL || is_start(sta->top))
+			;
+		else if (get_value(sta->top) < get_value(stb->top))
+			st_push(cmd, stb, sta);
+		if (started == false)
+		{
+			((t_data *)stb->top->content)->is_start = true;
+			started = true;
+		}
+		st_rotate(cmd, stb);
+	}
+	merge_to_a(cmd, sta, stb);
+}
+
+void	merge(t_list **cmd, t_stack *sta, t_stack *stb)
+{
+	int		i;
+	t_list	*elem[2];
+
+	while (sta->len - stb->len > 0)
+		st_push(cmd, stb, sta);
+	elem[0] = sta->top;
+	elem[1] = stb->top;
+	i = 0;
+	while (elem[0] || elem[1])
+	{
+		if (i % 2 == 0 && elem[0])
+			((t_data *)elem[0]->content)->is_start = true;
+		if (elem[0])
+			elem[0] = elem[0]->next;
+		if (i % 2 == 0 && elem[1])
+			((t_data *)elem[1]->content)->is_start = true;
+		if (elem[1])
+			elem[1] = elem[1]->next;
+		i++;
+	}
+	merge_to_a(cmd, sta, stb);
+	if (sta->top == NULL)
+		merge_to_a(cmd, sta, stb);
 }
 
 void	push_swap(t_list **cmd, t_stack *sta, t_stack *stb)
 {
 	if (sta->len == 2)
-		if (*(int *)sta->top->content > *(int *)sta->top->next->content)
+		if (get_value(sta->top) > get_value(sta->top->next))
 			st_swap(cmd, sta);
 	if (sta->len > 2)
-	{
-		a_to_b(cmd, sta, stb, sta->len);
-	}
+		merge(cmd, sta, stb);
 	return ;
 }

@@ -9,6 +9,7 @@ array=(
 	"./push_swap 1 2147483648 2"
 	"./push_swap 1 -2147483649 2"
 	"./push_swap 1 2147483649000 2"
+	"./push_swap 1 2 3 3"
 	)
 
 # for i in $(seq 1 ${#array[@]});
