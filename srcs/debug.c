@@ -16,10 +16,10 @@ void	print_num(void *data)
 
 void	put_stack(t_stack *sta, t_stack *stb)
 {
-	ft_putstr_fd("sta: ", 2);
+	ft_putstr_fd(YELLOW"sta: ", 2);
 	ft_lstiter(sta->top, print_num);
 	ft_putendl_fd("", 2);
 	ft_putstr_fd("stb: ", 2);
 	ft_lstiter(stb->top, print_num);
-	ft_putendl_fd("\n---", 2);
+	ft_putendl_fd(END"\n---", 2);
 }

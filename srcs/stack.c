@@ -23,7 +23,8 @@ void	st_swap(t_list **cmd, t_stack *stack)
 	tmp = (int *)stack->top->content;
 	stack->top->content = (int *)stack->top->next->content;
 	stack->top->next->content = tmp;
-	add_cmd(cmd, "s", stack->name);
+	if (cmd)
+		add_cmd(cmd, "s", stack->name);
 }
 
 void	st_push(t_list **cmd, t_stack *dst, t_stack *src)
@@ -38,7 +39,8 @@ void	st_push(t_list **cmd, t_stack *dst, t_stack *src)
 	ft_lstadd_front(&dst->top, tmp);
 	src->len--;
 	dst->len++;
-	add_cmd(cmd, "p", dst->name);
+	if (cmd)
+		add_cmd(cmd, "p", dst->name);
 }
 
 void	st_rotate(t_list **cmd, t_stack *stack)
@@ -51,7 +53,8 @@ void	st_rotate(t_list **cmd, t_stack *stack)
 	stack->top = stack->top->next;
 	tmp->next = NULL;
 	ft_lstadd_back(&stack->top, tmp);
-	add_cmd(cmd, "r", stack->name);
+	if (cmd)
+		add_cmd(cmd, "r", stack->name);
 }
 
 void	st_rrotate(t_list **cmd, t_stack *stack)
@@ -65,5 +68,6 @@ void	st_rrotate(t_list **cmd, t_stack *stack)
 	last1 = last2->next;
 	last2->next = NULL;
 	ft_lstadd_front(&stack->top, last1);
-	add_cmd(cmd, "rr", stack->name);
+	if (cmd)
+		add_cmd(cmd, "rr", stack->name);
 }

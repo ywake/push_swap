@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 		error();
 	init_stacks(&sta, "a", make_data(argc, argv), argc - 1);
 	init_stacks(&stb, "b", NULL, 0);
-	push_swap(&cmd, &sta, &stb);
+	push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);
 	optimize(cmd);
 	ft_lstiter(cmd, print);
