@@ -1,5 +1,5 @@
 #include "stack.h"
-#include "push_swap.h"
+#include "data.h"
 
 void	print_str(void *str)
 {

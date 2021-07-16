@@ -12,6 +12,7 @@ array=(
 	"./push_swap 1 2 3 3"
 	)
 
+make test
 # for i in $(seq 1 ${#array[@]});
 for i in ${!array[@]};
 do

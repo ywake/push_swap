@@ -1,5 +1,5 @@
 #include "stack.h"
-#include "push_swap.h"
+#include "data.h"
 
 void	print_str(void *str)
 {
@@ -28,14 +28,14 @@ int	main(int argc, char *argv[])
 
 	cmd = NULL;
 	list = make_data(argc, argv);
-	stack.top = &list;
+	stack.top = list;
 	stack.name = "a";
 	stack.len = argc - 1;
 	st_rrotate(&cmd, &stack);
 	ft_lstiter(cmd, print_str);
-	ft_lstiter(*stack.top, print_num);
+	ft_lstiter(stack.top, print_num);
 	print_len(&stack);
 	list = NULL;
-	null_stack.top = &list;
+	null_stack.top = list;
 	st_rotate(NULL, &stack);
 }

@@ -1,6 +1,6 @@
 INCLUDES="-I./includes -I./Libft"
 LIBS="-L. -lft"
-SRCS="./srcs/stack.c ./srcs/input.c ./srcs/error.c ./tests/stack_funcs/st_rotate/test.c"
+SRCS="./srcs/stack.c ./srcs/data.c ./srcs/validation.c ./srcs/error.c ./tests/stack_funcs/st_rotate/test.c"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
 gcc -g $INCLUDES $SRCS $LIBS
