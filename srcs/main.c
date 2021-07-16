@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 	init_stacks(&stb, "b", NULL, 0);
 	push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);
-	optimize(cmd);
+	optimize(&cmd);
 	ft_lstiter(cmd, print);
 	ft_lstclear(&sta.top, free);
 	ft_lstclear(&stb.top, free);
