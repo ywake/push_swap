@@ -2,7 +2,6 @@
 
 #include "libft.h"
 #include "data.h"
-#include <stdio.h>
 
 void	print(void *data)
 {

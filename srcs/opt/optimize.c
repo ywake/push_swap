@@ -2,7 +2,6 @@
 
 #include "stack.h"
 #include "libft.h"
-#include <stdio.h>
 
 enum e_count_opt
 {

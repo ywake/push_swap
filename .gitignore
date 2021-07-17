@@ -4,6 +4,7 @@
 !*.c
 !*.h
 !srcs
+!srcs/*/
 !includes
 !auto_test.sh
 !tests

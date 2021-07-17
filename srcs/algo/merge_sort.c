@@ -3,7 +3,6 @@
 #include "data.h"
 #include "stack.h"
 #include "debug.h"
-#include <stdio.h>
 
 void	merge_to_b(t_list **cmd, t_stack *sta, t_stack *stb);
 

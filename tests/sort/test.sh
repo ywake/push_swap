@@ -27,7 +27,7 @@ array=(
 	"$(seq 1 500 | sort -rn | xargs echo)" #->->4507
 	)
 
-# make test
+make test
 
 for i in ${!array[@]};
 do
