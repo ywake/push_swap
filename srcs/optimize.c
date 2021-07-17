@@ -64,7 +64,7 @@ t_list	*abbr(int cnt[len], t_list *lst[list_len], char *str[len])
 		pos[mid] = NULL;
 		while (cnt[xa] && cnt[xb] && cnt[xa]-- && cnt[xb]--)
 			add_cmd(&pos[mid], str[xx], "");
-		while (cnt[xa] && cnt[xa]--)
+		while (cnt[xa]--)
 			add_cmd(&pos[mid], str[xa], "");
 		while (cnt[xb]--)
 			add_cmd(&pos[mid], str[xb], "");

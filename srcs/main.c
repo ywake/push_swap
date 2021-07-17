@@ -19,6 +19,20 @@ void	init_stacks(t_stack *stack, char *name, t_list *list, int len)
 	stack->len = len;
 }
 
+int	check_sorted(t_stack *sta)
+{
+	t_list	*cur;
+
+	cur = sta->top;
+	while (cur && cur->next)
+	{
+		if (get_value(cur) > get_value(cur->next))
+			return (1);
+		cur = cur->next;
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_list	*cmd;
@@ -30,7 +44,8 @@ int	main(int argc, char *argv[])
 		error();
 	init_stacks(&sta, "a", make_data(argc, argv), argc - 1);
 	init_stacks(&stb, "b", NULL, 0);
-	push_swap_a(&cmd, &sta, &stb, sta.len);
+	if (check_sorted(&sta))
+		push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);
 	optimize(&cmd);
 	ft_lstiter(cmd, print);
