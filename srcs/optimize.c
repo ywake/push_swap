@@ -57,7 +57,7 @@ enum	e_abbr
 
 t_list	*abbr(int cnt[len], t_list *lst[list_len], char *str[len])
 {
-	t_list	*pos[abbr_len];
+	t_list	*pos[2];
 
 	if (cnt[xa] * cnt[xb] != 0)
 	{
@@ -84,10 +84,10 @@ t_list	*abbr(int cnt[len], t_list *lst[list_len], char *str[len])
 
 void	search(t_list **cmd, char *cmdstr)
 {
-	int		count[len];
-	t_list	*lst[list_len];
-	char	*str[len];
-	int		cmp[len];
+	int		count[3];
+	t_list	*lst[3];
+	char	*str[3];
+	int		cmp[3];
 
 	lst[save] = *cmd;
 	s_init(count, lst, str, cmdstr);

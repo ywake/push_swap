@@ -21,8 +21,6 @@ enum	e_count
 	cnt_len,
 };
 
-void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range);
-
 void	init(t_stack *stack, int range, int piv[piv_len], int count[cnt_len])
 {
 	t_list	*sorted;
@@ -65,13 +63,11 @@ void	rewind(t_list **cmd, t_stack *sta, t_stack *stb, int count[cnt_len])
 
 void	push_swap_a(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 {
-	int	pivot[piv_len];
-	int	count[cnt_len];
+	int	pivot[2];
+	int	count[4];
 
-	if (range == 2 && get_value(sta->top) > get_value(sta->top->next))
-		st_swap(cmd, sta);
-	if (range < 3)
-		return ;
+	if (range <= 3)
+		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_a));
 	init(sta, range, pivot, count);
 	while (range--)
 	{
@@ -93,15 +89,11 @@ void	push_swap_a(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 
 void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 {
-	int	pivot[piv_len];
-	int	count[cnt_len];
+	int	pivot[2];
+	int	count[4];
 
-	if (range == 2 && get_value(stb->top) < get_value(stb->top->next))
-		st_swap(cmd, stb);
-	while (range < 3 && range--)
-		st_push(cmd, sta, stb);
-	if (range < 3)
-		return ;
+	if (range <= 3)
+		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_b));
 	init(stb, range, pivot, count);
 	while (range--)
 	{
@@ -118,11 +110,4 @@ void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 	rewind(cmd, sta, stb, count);
 	push_swap_a(cmd, sta, stb, count[ra]);
 	push_swap_b(cmd, sta, stb, count[rb]);
-}
-
-void	push_swap(t_list **cmd, t_stack *sta, t_stack *stb)
-{
-	push_swap_a(cmd, sta, stb, sta->len);
-	put_stack(sta, stb);
-	return ;
 }
