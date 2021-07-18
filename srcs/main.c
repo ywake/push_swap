@@ -47,6 +47,7 @@ int	main(int argc, char *argv[])
 	if (check_sorted(&sta))
 		push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);
+	rm_nonsense(&cmd);
 	optimize(&cmd);
 	ft_lstiter(cmd, print);
 	ft_lstclear(&sta.top, free);
