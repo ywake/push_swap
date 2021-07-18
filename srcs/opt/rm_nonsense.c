@@ -3,33 +3,62 @@
 #include "stack.h"
 #include "libft.h"
 
-void	rm_nonsense_push(t_list **cmd, char *st1, char *nd2)
+t_list	*search_drop(t_list **cmd, t_list *start, char *wd[2], char **ignore)
+{
+	t_list	*end;
+	t_list	*tmp;
+
+	if (!ft_strncmp(wd[0], start->content, ft_strlen(wd[0]) + 1))
+	{
+		end = start->next;
+		while (end)
+		{
+			if (ignore && contain(ignore, end->content) + 1)
+				end = end->next;
+			else
+				break ;
+		}
+		if (end && !ft_strncmp(wd[1], end->content, ft_strlen(wd[1]) + 1))
+		{
+			ft_lstdrop(cmd, end, free);
+			tmp = start->next;
+			ft_lstdrop(cmd, start, free);
+			return (tmp);
+		}
+	}
+	return (start);
+}
+
+void	rm_nonsense_(t_list **cmd, char *word[2], char **ignore)
 {
 	t_list	*cur;
-	t_list	*tmp;
+	t_list	*save;
 
 	cur = *cmd;
 	while (cur)
 	{
-		if ((!ft_strncmp(st1, cur->content, ft_strlen(st1) + 1) && cur->next \
-			&& !ft_strncmp(nd2, cur->next->content, ft_strlen(nd2) + 1)) \
-			|| \
-			(!ft_strncmp(nd2, cur->content, ft_strlen(nd2) + 1) && cur->next \
-			&& !ft_strncmp(st1, cur->next->content, ft_strlen(st1) + 1)))
-		{
-			ft_lstdrop(cmd, cur->next, free);
-			tmp = cur->next;
-			ft_lstdrop(cmd, cur, free);
-			cur = tmp;
+		save = cur;
+		cur = search_drop(cmd, cur, word, ignore);
+		if (cur != save)
 			continue ;
-		}
+		cur = search_drop(cmd, cur, (char *[2]){word[1], word[0]}, ignore);
+		if (cur != save)
+			continue ;
 		cur = cur->next;
 	}
 }
 
-void	rm_nonsense(t_list **cmd)
+size_t	rm_nonsense(t_list **cmd)
 {
-	rm_nonsense_push(cmd, "pa", "pb");
-	rm_nonsense_push(cmd, "ra", "rra");
-	rm_nonsense_push(cmd, "rb", "rrb");
+	size_t	before;
+	size_t	after;
+
+	before = ft_lstsize(*cmd);
+	rm_nonsense_(cmd, (char *[2]){"pa", "pb"}, NULL);
+	rm_nonsense_(cmd, (char *[2]){"ra", "rra"},
+		(char *[4]){"sb", "rb", "rrb", NULL});
+	rm_nonsense_(cmd, (char *[2]){"rb", "rrb"},
+		(char *[4]){"sa", "ra", "rra", NULL});
+	after = ft_lstsize(*cmd);
+	return (after - before);
 }

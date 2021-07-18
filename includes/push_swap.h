@@ -12,7 +12,7 @@ enum e_stacks
 };
 
 void	optimize(t_list **cmd);
-void	rm_nonsense(t_list **cmd);
+size_t	rm_nonsense(t_list **cmd);
 void	push_swap_a(t_list **cmd, t_stack *sta, t_stack *stb, int range);
 void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range);
 void	small_swap(t_list **cmd, t_stack *st[st_len],

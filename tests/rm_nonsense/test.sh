@@ -23,6 +23,7 @@ printf "\e[1m\e[33m%s\n\e[m" "Should not work"
 testfunc "pa pa pa"				"pa\npa\npa\n"
 testfunc "pb pb pb"				"pb\npb\npb\n"
 testfunc "pa ra rb pb rra rrb"	"pa\nra\nrb\npb\nrra\nrrb\n"
+testfunc "ra pa ra pb ra"		"ra\npa\nra\npb\nra\n"
 
 printf "\e[1m\e[33m%s\n\e[m" "minimal"
 testfunc "pa pb"	""
@@ -60,5 +61,12 @@ testfunc "ra pb pa ra"		"ra\nra\n"
 testfunc "sa rra ra sa"		"sa\nsa\n"
 testfunc "sa rrb rb sa"		"sa\nsa\n"
 
-# rm leaksout push_swap
+printf "\e[1m\e[33m%s\n\e[m" "more"
+testfunc "sa ra rb sb rrb rra sa"	"sa\nrb\nsb\nrrb\nsa\n"
+testfunc "sa rb ra sa rra rrb sa"	"sa\nra\nsa\nrra\nsa\n"
+printf "\e[1m\e[33m%s\n\e[m" "more reverse"
+testfunc "sa rra rb sb rrb ra sa"	"sa\nrb\nsb\nrrb\nsa\n"
+testfunc "sa rrb ra sa rra rb sa"	"sa\nra\nsa\nrra\nsa\n"
+
+rm leaksout push_swap
 exit $FLG
