@@ -4,6 +4,9 @@ LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
 gcc -o push_swap -g $INCLUDES $SRCS ./tests/sharedlib.c $LIBS
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 
 RTN=0
 function testfunc() {

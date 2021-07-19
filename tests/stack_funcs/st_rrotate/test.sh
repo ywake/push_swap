@@ -4,6 +4,9 @@ SRCS="./srcs/data/stack.c ./srcs/data/data.c ./srcs/data/validation.c ./srcs/err
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
 gcc -g $INCLUDES $SRCS $LIBS
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 
 RTN=0
 function testfunc() {

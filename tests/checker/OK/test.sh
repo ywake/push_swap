@@ -1,7 +1,13 @@
 gen_randint() { python3 -c "import random;print(' '.join(str(num) for num in random.sample(range($2, $3+1), $1)))";}
 
 make
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 make bonus
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 
 FLG=0
 

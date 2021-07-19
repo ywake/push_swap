@@ -1,4 +1,7 @@
 make bonus
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 
 cases=(
 	"pb"		# Sorted, but stackB is remain.
