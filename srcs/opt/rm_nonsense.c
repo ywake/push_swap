@@ -8,7 +8,7 @@ t_list	*search_drop(t_list **cmd, t_list *start, char *wd[2], char **ignore)
 	t_list	*end;
 	t_list	*tmp;
 
-	if (!ft_strncmp(wd[0], start->content, ft_strlen(wd[0]) + 1))
+	if (!ft_strcmp(wd[0], start->content))
 	{
 		end = start->next;
 		while (end)
@@ -18,7 +18,7 @@ t_list	*search_drop(t_list **cmd, t_list *start, char *wd[2], char **ignore)
 			else
 				break ;
 		}
-		if (end && !ft_strncmp(wd[1], end->content, ft_strlen(wd[1]) + 1))
+		if (end && !ft_strcmp(wd[1], end->content))
 		{
 			ft_lstdrop(cmd, end, free);
 			tmp = start->next;

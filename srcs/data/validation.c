@@ -12,6 +12,8 @@ bool	is_valid_num(char *str1)
 	int		num;
 	char	*str2;
 
+	if ((str1[0] == '+' && ft_isdigit(str1[1])) || !ft_strcmp(str1, "-0"))
+		str1++;
 	num = ft_atoi(str1);
 	str2 = ft_itoa(num);
 	if (str2 == NULL)

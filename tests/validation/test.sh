@@ -1,7 +1,6 @@
 FLG=0
 
 array=(
-	"./push_swap"
 	"./push_swap \"\""
 	"./push_swap 1 2 three"
 	"./push_swap 1 2 3three"
@@ -10,6 +9,10 @@ array=(
 	"./push_swap 1 -2147483649 2"
 	"./push_swap 1 2147483649000 2"
 	"./push_swap 1 2 3 3"
+	"./push_swap 1 +-2 3"
+	"./push_swap 1 -+2 3"
+	"./push_swap 1 ++2 3"
+	"./push_swap 1 --2 3"
 	)
 
 make test

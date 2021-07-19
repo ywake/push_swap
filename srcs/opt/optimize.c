@@ -29,7 +29,7 @@ void	s_init(int cnt[len], t_list *lst[list_len], char *str[len], char *cmd)
 		return ;
 	str[xa] = ft_strjoin(cmd, "a");
 	str[xb] = ft_strjoin(cmd, "b");
-	if (ft_strncmp(cmd, "rr", 3) == 0)
+	if (ft_strcmp(cmd, "rr") == 0)
 		str[xx] = ft_strjoin(cmd, "r");
 	else
 		str[xx] = ft_strjoin(cmd, cmd);
@@ -92,8 +92,8 @@ void	search(t_list **cmd, char *cmdstr)
 	s_init(count, lst, str, cmdstr);
 	while (*cmd)
 	{
-		cmp[xa] = ft_strncmp((*cmd)->content, str[xa], ft_strlen(str[xa]) + 1);
-		cmp[xb] = ft_strncmp((*cmd)->content, str[xb], ft_strlen(str[xb]) + 1);
+		cmp[xa] = ft_strcmp((*cmd)->content, str[xa]);
+		cmp[xb] = ft_strcmp((*cmd)->content, str[xb]);
 		if ((!cmp[xa] && ++count[xa]) || (!cmp[xb] && ++count[xb]))
 		{
 			if (lst[start] == NULL)

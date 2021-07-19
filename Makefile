@@ -21,16 +21,15 @@ all: $(NAME)
 
 $(LIBFT): ./Libft/*.c
 	$(MAKE) bonus -C ./Libft
-	mv ./Libft/libft.a ./libft.a
+	cp ./Libft/libft.a ./libft.a
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME):  $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) -o $(NAME) $(LIBS)
 
-bonus: $(BONUSFLG)
+bonus: $(B_NAME)
 
-$(BONUSFLG): $(B_OBJS) $(LIBFT)
-	@touch $(BONUSFLG)
-	$(CC) $(B_OBJS) -o $(NAME) $(LIBS)
+$(B_NAME): $(LIBFT) $(B_OBJS)
+	$(CC) $(B_OBJS) -o $(B_NAME) $(LIBS)
 
 clean:
 	$(MAKE) clean -C ./Libft
@@ -46,7 +45,7 @@ norm:
 	@printf "\e[31m"; norminette srcs includes Libft tests/*/test.c tests/*/*/test.c | grep -v ": OK!" \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
-test: $(OBJS) $(LIBFT)
+test: $(LIBFT) $(OBJS)
 	$(CC) $(LIBS) $(OBJS) ./tests/sharedlib.c -o $(NAME)
 
 autotest:
