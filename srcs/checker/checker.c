@@ -35,7 +35,7 @@ bool	checker(t_list *cmd, t_stack *sta, t_stack *stb)
 	simulate_stack(cmd, sta, stb);
 	if (stb->len != 0)
 		return (false);
-	if (is_sorted(sta))
+	if (is_sorted(sta, -1, asc))
 		return (true);
 	return (false);
 }

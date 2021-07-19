@@ -18,16 +18,40 @@ void	st_double(t_list **cmd, void (*st_any)(), t_stack *sta, t_stack *stb)
 	}
 }
 
-bool	is_sorted(t_stack *stack)
+bool	asc(int a, int b)
+{
+	if (a > b)
+		return (true);
+	return (false);
+}
+
+bool	desc(int a, int b)
+{
+	if (a < b)
+		return (true);
+	return (false);
+}
+
+bool	is_sorted(t_stack *stack, size_t range, bool (*cmp)(int, int))
 {
 	t_list	*cur;
+	t_list	*next;
 
 	cur = stack->top;
-	while (cur && cur->next)
+	if (cur != NULL)
+		next = cur->next;
+	if (range <= 1)
+		next = NULL;
+	while (range && cur && next)
 	{
-		if (get_value(cur) > get_value(cur->next))
+		if (cmp(get_value(cur), get_value(next)))
 			return (false);
-		cur = cur->next;
+		cur = next;
+		range--;
+		if (range <= 1)
+			next = NULL;
+		else
+			next = next->next;
 	}
 	return (true);
 }

@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	init_stacks(&sta, "a", make_data(argc, argv), argc - 1);
 	init_stacks(&stb, "b", NULL, 0);
-	if (!is_sorted(&sta))
+	if (!is_sorted(&sta, -1, asc))
 		push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);
 	while (rm_nonsense(&cmd))
