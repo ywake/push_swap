@@ -20,5 +20,6 @@ typedef struct s_data
 t_list	*make_data(int argc, char *argv[]);
 int		get_value(t_list *list);
 bool	is_start(t_list *list);
+int		get_next_line(int fd, char **line);
 
 #endif
