@@ -12,4 +12,4 @@
 !libs
 !libs/.gitkeep
 !checker_Mac
-sharedlib.c
+sharedlib*

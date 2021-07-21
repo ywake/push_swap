@@ -4,7 +4,7 @@ make
 if [ $? -ne 0 ]; then
 	exit 1
 fi
-make bonus
+make bonus_leak
 if [ $? -ne 0 ]; then
 	exit 1
 fi
@@ -41,10 +41,10 @@ corrects=(
 for i in ${!corrects[@]};
 do
 	echo --- "${corrects[$i]}" ---
-	./push_swap ${corrects[$i]} > out
-	# cat out | ./checker ${corrects[$i]}
-	diff <(cat out | ./checker_Mac ${corrects[$i]}) <(cat out | ./checker ${corrects[$i]})
-	if [ $? -eq 0 ]; then
+	./push_swap ${corrects[$i]} | ./checker ${corrects[$i]} > out
+	STATUS=$?
+	diff <(cat out) <(./push_swap ${corrects[$i]} | ./checker_Mac ${corrects[$i]})
+	if [ $? -eq 0 ] && [ $STATUS -eq 0 ] ; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
 		printf "\e[31m%s\n\e[m" ">> KO!"
@@ -53,4 +53,5 @@ do
 	rm out
 done
 
+rm leaksout
 exit $FLG

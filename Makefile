@@ -3,7 +3,7 @@ B_NAME	:= checker
 CC		:= gcc
 INCLUDE	:= -I./includes -I./Libft
 CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
-LIBFT	:= ./libs/libft.a
+LIBFT	:= ./libft.a
 LIBS	:= -L. -lft
 SRCDIR	:= ./srcs/
 SRCS	:= main.c error.c debug.c \
@@ -39,8 +39,9 @@ clean:
 	rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
-	rm -f libs/libft.a
-	rm -f $(NAME)
+	rm -f libft.a
+	rm -f out err leaksout
+	rm -f $(NAME) $(B_NAME)
 
 re: fclean all
 
@@ -48,9 +49,12 @@ norm:
 	@printf "\e[31m"; norminette srcs includes Libft tests/*/test.c tests/*/*/test.c | grep -v ": OK!" \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
-test: $(LIBFT) $(OBJS)
+leak: $(LIBFT) $(OBJS)
 	$(CC) $(LIBS) $(OBJS) ./tests/sharedlib.c -o $(NAME)
 
-autotest:
+bonus_leak: $(LIBFT) $(B_OBJS)
+	$(CC) $(LIBS) $(B_OBJS) ./tests/sharedlib_checker.c -o $(B_NAME)
+
+autotest: $(LIBFT)
 	bash auto_test.sh $(TEST)\
 	&& $(MAKE) norm

@@ -15,7 +15,7 @@ array=(
 	"./push_swap 1 --2 3"
 	)
 
-make test
+make leak
 if [ $? -ne 0 ]; then
 	exit 1
 fi
@@ -33,4 +33,5 @@ do
 		FLG=1
 	fi
 done
+rm leaksout
 exit $FLG

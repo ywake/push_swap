@@ -13,11 +13,14 @@ void	get_cmd(t_list **cmd)
 
 	while (set_rtn_int(&rtn, get_next_line(STDIN_FILENO, &line)))
 	{
-		if (rtn == -1 || !set_rtn((char **)&elem, (char *)ft_lstnew(line)))
+		if (rtn == -1 || line == NULL
+			|| !set_rtn((char **)&elem, (char *)ft_lstnew(line)))
 			error();
 		ft_lstadd_front(cmd, elem);
 		line = NULL;
 	}
+	if (rtn == 0)
+		free(line);
 	ft_lst_reverse(cmd);
 }
 

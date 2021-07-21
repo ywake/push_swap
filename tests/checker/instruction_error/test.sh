@@ -1,4 +1,4 @@
-make bonus
+make bonus_leak
 if [ $? -ne 0 ]; then
 	exit 1
 fi
@@ -15,7 +15,7 @@ do
 	echo ${cases[$i]} | tr ' ' '\n' | ./checker 4 1 2 3 2>err
 	STATUS=$?
 	diff err <(echo Error)
-	if [ $STATUS -eq 1 ] && [ $? -eq 0 ]; then
+	if [ $? -eq 0 ] && [ $STATUS -eq 1 ]; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
 		printf "\e[31m%s\n\e[m" ">> KO!"
@@ -23,4 +23,5 @@ do
 	fi
 done
 
+rm leaksout err
 exit $FLG

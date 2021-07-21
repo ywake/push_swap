@@ -28,7 +28,7 @@ array=(
 	"$(seq 1 500 | sort -rn | xargs echo)" #->->4507->4489
 	)
 
-make test
+make leak
 if [ $? -ne 0 ]; then
 	exit 1
 fi
@@ -41,10 +41,11 @@ for i in ${!array[@]};
 do
 	echo --- "${array[$i]}" ---
 	./push_swap ${array[$i]} > out
+	STATUS=$?
 	# cat out
 	printf "\e[33m%s\n\e[m" $(cat out | wc -l)
 	diff <(cat out | ./checker_Mac ${array[$i]}) <(echo "OK") >/dev/null
-	if [ $? -eq 0 ]; then
+	if [ $? -eq 0 ] && [ $STATUS -eq 0 ]; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
 		printf "\e[31m%s\n\e[m" ">> KO!"
@@ -52,4 +53,5 @@ do
 	fi
 	rm out
 done
+rm leaksout
 exit $FLG
