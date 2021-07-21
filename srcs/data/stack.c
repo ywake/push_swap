@@ -16,13 +16,14 @@ void	add_cmd(t_list **cmd, char *str, char *stack_name)
 
 void	st_swap(t_list **cmd, t_stack *stack)
 {
-	int		*tmp;
+	t_list	*tmp;
 
 	if (stack->top == NULL || stack->top->next == NULL)
 		return ;
-	tmp = (int *)stack->top->content;
-	stack->top->content = (int *)stack->top->next->content;
-	stack->top->next->content = tmp;
+	tmp = stack->top;
+	stack->top = stack->top->next;
+	tmp->next = stack->top->next;
+	stack->top->next = tmp;
 	if (cmd)
 		add_cmd(cmd, "s", stack->name);
 }

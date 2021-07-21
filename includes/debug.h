@@ -5,5 +5,6 @@
 
 void	print_num(void *num);
 void	put_stack(t_stack *sta, t_stack *stb);
+void	print_cmd(void *str);
 
 #endif

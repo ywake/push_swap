@@ -23,3 +23,10 @@ void	put_stack(t_stack *sta, t_stack *stb)
 	ft_lstiter(stb->top, print_num);
 	ft_putendl_fd(END"\n---", 2);
 }
+
+void	print_cmd(void *str)
+{
+	ft_putstr_fd(YELLOW, 2);
+	ft_putstr_fd(str, 2);
+	ft_putendl_fd(END, 2);
+}

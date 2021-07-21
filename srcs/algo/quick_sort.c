@@ -66,7 +66,7 @@ void	push_swap_a(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 	int	pivot[2];
 	int	count[4];
 
-	if (range <= 3)
+	if (range <= 5)
 		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_a));
 	init(sta, range, pivot, count);
 	while (range--)
@@ -92,7 +92,7 @@ void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 	int	pivot[2];
 	int	count[4];
 
-	if (range <= 3)
+	if (range <= 5)
 		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_b));
 	init(stb, range, pivot, count);
 	while (range--)
