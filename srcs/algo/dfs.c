@@ -73,9 +73,9 @@ bool	can_move(t_state *state, char *next)
 			!is_movable(state, stb)))
 		return (false);
 	if ((contain((char *[]){"rra", "rrr", NULL}, next) + 1 && \
-			!is_movable(state, ft_lstlast(sta)))
+			!is_movable(state, state->sta->btm))
 		|| (contain((char *[]){"rrb", "rrr", NULL}, next) + 1 && \
-			!is_movable(state, ft_lstlast(stb))))
+			!is_movable(state, state->stb->btm)))
 		return (false);
 	return (true);
 }

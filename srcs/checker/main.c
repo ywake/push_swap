@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (0);
 	sta = (t_stack){.top = make_data(argc, argv), .len = argc - 1};
+	sta.btm = ft_lstlast(sta.top);
 	stb = (t_stack){};
 	cmd = NULL;
 	get_cmd(&cmd);

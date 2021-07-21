@@ -17,6 +17,7 @@ void	init_stacks(t_stack *stack, char *name, t_list *list, int len)
 	stack->name = name;
 	stack->top = list;
 	stack->len = len;
+	stack->btm = ft_lstlast(list);
 }
 
 int	main(int argc, char *argv[])

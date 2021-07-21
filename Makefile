@@ -14,7 +14,6 @@ OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 B_SRCS	:= checker/main.c checker/checker.c error.c debug.c \
 			data/data.c data/get_next_line.c data/stack.c data/stack2.c data/validation.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
-BONUSFLG:= .bonus_flg
 
 .PHONY: all clean fclean re bonus test
 
@@ -37,7 +36,7 @@ $(B_NAME): $(LIBFT) $(B_OBJS)
 
 clean:
 	$(MAKE) clean -C ./Libft
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
 	rm -f libs/libft.a

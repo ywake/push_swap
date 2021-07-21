@@ -15,9 +15,9 @@ function testfunc() {
 	RTN=$(($RTN | $?))
 }
 
-testfunc "./a.out 1 2 3" "ra\n2\n3\n1\nlen:3\n"
-testfunc "./a.out 1 2 3 5" "ra\n2\n3\n5\n1\nlen:4\n"
-testfunc "./a.out 1" "1\nlen:1\n"
+testfunc "./a.out 1" "1\nlast:1\nlen:1\n"
+testfunc "./a.out 2 1 3" "ra\n1\n3\n2\nlast:2\nlen:3\n"
+testfunc "./a.out 5 2 3 1" "ra\n2\n3\n1\n5\nlast:5\nlen:4\n"
 
 rm a.out
 exit $RTN
