@@ -9,7 +9,5 @@
 !auto_test.sh
 !tests
 !tests/**
-!libs
-!libs/.gitkeep
 !checker_Mac
 sharedlib*
