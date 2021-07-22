@@ -41,16 +41,17 @@ corrects=(
 for i in ${!corrects[@]};
 do
 	echo --- "${corrects[$i]}" ---
-	./push_swap ${corrects[$i]} | ./checker ${corrects[$i]} > out
+	./push_swap ${corrects[$i]} > out
+	cat out | ./checker ${corrects[$i]} > out_checker
 	STATUS=$?
-	diff <(cat out) <(./push_swap ${corrects[$i]} | ./checker_Mac ${corrects[$i]})
+	diff <(cat out_checker) <(cat out | ./checker_Mac ${corrects[$i]})
 	if [ $? -eq 0 ] && [ $STATUS -eq 0 ] ; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
 		printf "\e[31m%s\n\e[m" ">> KO!"
 		FLG=1
 	fi
-	rm out
+	rm out out_checker
 done
 
 rm leaksout

@@ -40,7 +40,7 @@ clean:
 
 fclean: clean
 	rm -f libft.a
-	rm -f out err leaksout
+	rm -f out out_checker err leaksout
 	rm -f $(NAME) $(B_NAME)
 
 re: fclean all
