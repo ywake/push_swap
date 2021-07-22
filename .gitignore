@@ -10,4 +10,5 @@
 !tests
 !tests/**
 !checker_Mac
+!Libft
 sharedlib*
