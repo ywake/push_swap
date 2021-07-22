@@ -7,12 +7,14 @@ LIBFT	:= ./libft.a
 LIBS	:= -L. -lft
 SRCDIR	:= ./srcs/
 SRCS	:= main.c error.c debug.c \
-			data/data.c data/validation.c data/stack.c data/stack2.c\
+			data/data.c data/validation.c\
+			stack/stack.c stack/stack2.c\
 			algo/quick_sort.c algo/small_swap.c algo/dfs.c\
 			opt/optimize.c opt/rm_nonsense.c checker/checker.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 B_SRCS	:= checker/main.c checker/checker.c error.c debug.c \
-			data/data.c data/get_next_line.c data/stack.c data/stack2.c data/validation.c
+			data/data.c data/get_next_line.c data/validation.c \
+			stack/stack.c stack/stack2.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 
 .PHONY: all clean fclean re bonus test

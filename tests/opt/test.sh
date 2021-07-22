@@ -1,5 +1,5 @@
 INCLUDES="-I./includes -I./Libft"
-SRCS="./srcs/opt/optimize.c ./srcs/data/stack.c ./srcs/error.c ./tests/opt/test.c"
+SRCS="./srcs/opt/optimize.c ./srcs/stack/stack.c ./srcs/error.c ./tests/opt/test.c"
 LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"

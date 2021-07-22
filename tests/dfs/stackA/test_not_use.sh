@@ -1,6 +1,6 @@
 INCLUDES="-I./includes -I./Libft"
 SRCS="./srcs/data/data.c ./srcs/data/validation.c ./srcs/error.c \
-		./srcs/data/stack.c ./srcs/data/stack2.c ./srcs/debug.c \
+		./srcs/stack/stack.c ./srcs/stack/stack2.c ./srcs/debug.c \
 		./srcs/algo/small_swap.c ./srcs/algo/dfs.c \
 		./srcs/checker/checker.c ./tests/dfs/stackA/test.c"
 LIBS="-L. -lft"
