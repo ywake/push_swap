@@ -8,13 +8,13 @@ LIBS	:= -L. -lft
 SRCDIR	:= ./srcs/
 SRCS	:= main.c error.c debug.c \
 			data/data.c data/validation.c\
-			stack/stack.c stack/stack2.c\
+			stack/stack.c stack/stack2.c stack/command.c\
 			algo/quick_sort.c algo/small_swap.c algo/dfs.c\
-			opt/optimize.c opt/rm_nonsense.c checker/checker.c
+			opt/optimize.c opt/rm_nonsense.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
-B_SRCS	:= checker/main.c checker/checker.c error.c debug.c \
+B_SRCS	:= checker/main.c error.c debug.c \
 			data/data.c data/get_next_line.c data/validation.c \
-			stack/stack.c stack/stack2.c
+			stack/stack.c stack/stack2.c stack/command.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 
 .PHONY: all clean fclean re bonus test

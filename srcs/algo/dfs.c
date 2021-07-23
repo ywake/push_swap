@@ -4,53 +4,6 @@
 #include "stack.h"
 #include "debug.h"
 #include "logging.h"
-#include <stdio.h>
-
-void	do_cmd(t_state *state, char *cmd)
-{
-	if (cmd == NULL)
-		return ;
-	add_cmd(state->cmd, cmd, "");
-	if (contain((char *[]){"sa", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, state->sta);
-	if (contain((char *[]){"sb", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, state->stb);
-	if (!ft_strcmp("pa", cmd))
-		st_push(NULL, state->sta, state->stb);
-	if (!ft_strcmp("pb", cmd))
-		st_push(NULL, state->stb, state->sta);
-	if (contain((char *[]){"ra", "rr", NULL}, cmd) + 1)
-		st_rotate(NULL, state->sta);
-	if (contain((char *[]){"rb", "rr", NULL}, cmd) + 1)
-		st_rotate(NULL, state->stb);
-	if (contain((char *[]){"rra", "rrr", NULL}, cmd) + 1)
-		st_rrotate(NULL, state->sta);
-	if (contain((char *[]){"rrb", "rrr", NULL}, cmd) + 1)
-		st_rrotate(NULL, state->stb);
-}
-
-void	undo_cmd(t_state *state, char *cmd)
-{
-	ft_lstdrop(state->cmd, *state->cmd, free);
-	if (cmd == NULL)
-		return ;
-	if (contain((char *[]){"sa", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, state->sta);
-	if (contain((char *[]){"sb", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, state->stb);
-	if (!ft_strcmp("pa", cmd))
-		st_push(NULL, state->stb, state->sta);
-	if (!ft_strcmp("pb", cmd))
-		st_push(NULL, state->sta, state->stb);
-	if (contain((char *[]){"ra", "rr", NULL}, cmd) + 1)
-		st_rrotate(NULL, state->sta);
-	if (contain((char *[]){"rb", "rr", NULL}, cmd) + 1)
-		st_rrotate(NULL, state->stb);
-	if (contain((char *[]){"rra", "rrr", NULL}, cmd) + 1)
-		st_rotate(NULL, state->sta);
-	if (contain((char *[]){"rrb", "rrr", NULL}, cmd) + 1)
-		st_rotate(NULL, state->stb);
-}
 
 bool	can_move(t_state *state, char *next)
 {
@@ -106,14 +59,21 @@ bool	has_mean(char *cmd, char *next)
 	return (true);
 }
 
+bool	is_completed(t_state *state)
+{
+	if (state->sta->len < state->range)
+		return (false);
+	if (ft_lst_at(state->sta->top, state->range) != state->a_next)
+		return (false);
+	return (true);
+}
+
 void	dfs(t_state *state, char **cmds, char *cmd, size_t move_num)
 {
 	int		next;
 
-	do_cmd(state, cmd);
-	if (state->sta->len >= state->range
-		&& ft_lst_at(state->sta->top, state->range) == state->a_next
-		&& is_sorted(state->sta, state->range, asc))
+	do_cmd(state->cmd, (t_stack *[]){state->sta, state->stb}, cmds, cmd);
+	if (is_completed(state) && is_sorted(state->sta, state->range, asc))
 	{
 		if (state->find)
 			ft_lstclear(&state->find, free);
@@ -127,5 +87,5 @@ void	dfs(t_state *state, char **cmds, char *cmd, size_t move_num)
 			dfs(state, cmds, cmds[next], move_num + 1);
 		next++;
 	}
-	undo_cmd(state, cmd);
+	undo_cmd(state->cmd, (t_stack *[]){state->sta, state->stb}, cmds, cmd);
 }

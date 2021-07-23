@@ -4,13 +4,6 @@
 # include "libft.h"
 # include "stack.h"
 
-enum e_stacks
-{
-	st_a,
-	st_b,
-	st_len,
-};
-
 typedef struct s_state
 {
 	t_stack	*sta;

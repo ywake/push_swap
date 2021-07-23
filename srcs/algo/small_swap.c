@@ -4,7 +4,6 @@
 #include "stack.h"
 #include "data.h"
 #include "debug.h"
-#include "checker.h"
 
 bool	is_movable(t_state *state, t_list *elem)
 {

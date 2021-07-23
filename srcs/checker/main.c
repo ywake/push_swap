@@ -1,47 +1,51 @@
-#include "checker.h"
-
 #include "error.h"
 #include "data.h"
 #include "stack.h"
-#include <unistd.h>
 
-void	get_cmd(t_list **cmd)
+void	read_do_cmd(t_stack *sta, t_stack *stb)
 {
-	char	*line;
+	char	*cmd;
 	int		rtn;
-	t_list	*elem;
+	char	**vaild_list;
 
-	while (set_rtn_int(&rtn, get_next_line(STDIN_FILENO, &line)))
+	vaild_list = (char *[]){"ss", "sa", "sb", "pa", "pb", "rr", "ra", "rb",
+		"rrr", "rra", "rrb", NULL};
+	while (set_rtn_int(&rtn, get_next_line(STDIN_FILENO, &cmd)))
 	{
-		if (rtn == -1 || line == NULL
-			|| !set_rtn((char **)&elem, (char *)ft_lstnew(line)))
+		if (rtn == -1 || cmd == NULL)
 			error();
-		ft_lstadd_front(cmd, elem);
-		line = NULL;
+		if (!do_cmd(NULL, (t_stack *[]){sta, stb}, vaild_list, cmd))
+			error();
+		free_set((void **)&cmd, NULL);
 	}
 	if (rtn == 0)
-		free(line);
-	ft_lst_reverse(cmd);
+		free(cmd);
+}
+
+bool	checker(t_stack *sta, t_stack *stb)
+{
+	if (stb->len != 0)
+		return (false);
+	if (is_sorted(sta, -1, asc))
+		return (true);
+	return (false);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	sta;
 	t_stack	stb;
-	t_list	*cmd;
 
 	if (argc == 1)
 		return (0);
 	sta = (t_stack){.top = make_data(argc, argv), .len = argc - 1};
 	sta.btm = ft_lstlast(sta.top);
 	stb = (t_stack){};
-	cmd = NULL;
-	get_cmd(&cmd);
-	if (checker(cmd, &sta, &stb))
+	read_do_cmd(&sta, &stb);
+	if (checker(&sta, &stb))
 		ft_putendl_fd("OK", 1);
 	else
 		ft_putendl_fd("KO", 1);
 	ft_lstclear(&sta.top, free);
 	ft_lstclear(&stb.top, free);
-	ft_lstclear(&cmd, free);
 }
