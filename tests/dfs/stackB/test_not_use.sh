@@ -1,8 +1,7 @@
 INCLUDES="-I./includes -I./Libft"
-SRCS="./srcs/data/data.c ./srcs/data/validation.c ./srcs/error.c \
-		./srcs/stack/stack.c ./srcs/stack/stack2.c ./srcs/debug.c \
-		./srcs/algo/small_swap.c ./srcs/algo/dfs.c \
-		./srcs/checker/checker.c ./tests/dfs/stackB/test.c"
+SRCS="./srcs/data/data.c ./srcs/data/validation.c ./srcs/error.c ./srcs/debug.c\
+		./srcs/stack/stack.c ./srcs/stack/stack2.c ./srcs/stack/command.c \
+		./srcs/algo/small_swap.c ./srcs/algo/dfs.c ./tests/dfs/stackB/test.c"
 LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"

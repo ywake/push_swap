@@ -20,9 +20,11 @@ int	main(int argc, char *argv[])
 	ft_putendl_fd("test...", 2);
 	list = make_data(2, (char *[]){"./push_swap", "999"});
 	sta = (t_stack){.name = "a", .top = list, .len = 1};
+	sta.btm = ft_lstlast(sta.top);
 	list = make_data(2, (char *[]){"./push_swap", "888"});
 	stb = (t_stack){.name = "b", .top = make_data(argc, argv), .len = argc};
 	ft_lstadd_back(&stb.top, list);
+	stb.btm = ft_lstlast(stb.top);
 	cmd = NULL;
 	put_stack(&sta, &stb);
 	small_swap(&cmd, (t_stack *[2]){&sta, &stb}, stb.len - 1, st_b);

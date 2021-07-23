@@ -29,7 +29,8 @@ void	small_swap(t_list **cmd, t_stack *st[st_len], int r, enum e_stacks ope)
 	char	**cmds;
 
 	cmd_tmp = NULL;
-	state = (t_state){.cmd = &cmd_tmp, .search_max = r * 2 + (r == 4),
+	state = (t_state){.cmd = &cmd_tmp,
+		.search_max = (int []){0, 1, 3, 5 + ope, 8 + !ope, 10}[r],
 		.sta = st[st_a], .stb = st[st_b], .range = r,
 		.a_next = ft_lst_at(st[st_a]->top, r * !ope)};
 	movable = (t_list *[]){NULL, NULL, NULL, NULL, NULL, NULL};
