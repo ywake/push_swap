@@ -29,12 +29,12 @@ $(LIBFT): ./Libft/*.c
 	cp ./Libft/libft.a ./libft.a
 
 $(NAME):  $(LIBFT) $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
 bonus: $(B_NAME)
 
 $(B_NAME): $(LIBFT) $(B_OBJS)
-	$(CC) $(B_OBJS) -o $(B_NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(B_OBJS) -o $(B_NAME) $(LIBS)
 
 clean:
 	$(MAKE) clean -C ./Libft
@@ -52,10 +52,10 @@ norm:
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
 leak: $(LIBFT) $(OBJS)
-	$(CC) $(LIBS) $(OBJS) ./tests/sharedlib.c -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBS) $(OBJS) ./tests/sharedlib.c -o $(NAME)
 
 bonus_leak: $(LIBFT) $(B_OBJS)
-	$(CC) $(LIBS) $(B_OBJS) ./tests/sharedlib_checker.c -o $(B_NAME)
+	$(CC) $(CFLAGS) $(LIBS) $(B_OBJS) ./tests/sharedlib_checker.c -o $(B_NAME)
 
 autotest: $(LIBFT)
 	bash auto_test.sh $(TEST)\
