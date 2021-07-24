@@ -19,5 +19,5 @@ testfunc "./a.out 1" "1\nlast:1\nlen:1\n"
 testfunc "./a.out 1 2" "sa\n2\n1\nlast:1\nlen:2\n"
 testfunc "./a.out 1 2 3" "sa\n2\n1\n3\nlast:3\nlen:3\n"
 
-rm a.out
+rm -f a.out
 exit $RTN

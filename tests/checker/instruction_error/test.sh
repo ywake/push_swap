@@ -23,5 +23,5 @@ do
 	fi
 done
 
-rm leaksout err
+rm -f leaksout err
 exit $FLG

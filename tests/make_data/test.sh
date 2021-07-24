@@ -27,5 +27,5 @@ testfunc "1 2147483647 3"	"1\n2147483647\n3\n"
 testfunc "1 -2147483648 3"	"1\n-2147483648\n3\n"
 testfunc "-1 -3 -2"			"-1\n-3\n-2\n"
 
-rm push_swap leaksout
+rm -f push_swap leaksout
 exit $RTN

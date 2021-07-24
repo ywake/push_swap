@@ -33,5 +33,5 @@ do
 		FLG=1
 	fi
 done
-rm leaksout
+rm -f leaksout
 exit $FLG

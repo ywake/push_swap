@@ -1,5 +1,11 @@
 gen_randint() { python3 -c "import random;print(' '.join(str(num) for num in random.sample(range($2, $3+1), $1)))";}
 
+if [ $(uname) == "Linux" ]; then
+	CHECKER="./checker_linux"
+else
+	CHECKER="./checker_Mac"
+fi
+
 make
 if [ $? -ne 0 ]; then
 	exit 1
@@ -44,15 +50,15 @@ do
 	./push_swap ${corrects[$i]} > out
 	cat out | ./checker ${corrects[$i]} > out_checker
 	STATUS=$?
-	diff <(cat out_checker) <(cat out | ./checker_Mac ${corrects[$i]})
+	diff <(cat out_checker) <(cat out | $CHECKER ${corrects[$i]})
 	if [ $? -eq 0 ] && [ $STATUS -eq 0 ] ; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
 		printf "\e[31m%s\n\e[m" ">> KO!"
 		FLG=1
 	fi
-	rm out out_checker
+	rm -f out out_checker
 done
 
-rm leaksout
+rm -f leaksout
 exit $FLG

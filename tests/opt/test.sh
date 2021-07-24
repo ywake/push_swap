@@ -1,5 +1,5 @@
 INCLUDES="-I./includes -I./Libft"
-SRCS="./srcs/opt/optimize.c ./srcs/stack/stack.c ./srcs/error.c ./tests/opt/test.c"
+SRCS="./srcs/opt/optimize.c ./srcs/stack/stack.c ./srcs/error.c ./srcs/debug.c ./tests/opt/test.c"
 LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
@@ -73,5 +73,5 @@ testfunc "sb sb sa"			"sb\nss"
 testfunc "rb ra rb rb rb"	"rb\nrb\nrb\nrr"
 testfunc "rrb rrb rra sa"	"rrb\nrrr\nsa"
 
-rm leaksout push_swap
+rm -f leaksout push_swap
 exit $FLG

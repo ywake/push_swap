@@ -10,6 +10,7 @@ int	main(int argc, char *argv[])
 {
 	t_list	*cmd;
 
+	cmd = NULL;
 	while (--argc)
 		ft_lstadd_front(&cmd, ft_lstnew(ft_strdup(argv[argc])));
 	optimize(&cmd);

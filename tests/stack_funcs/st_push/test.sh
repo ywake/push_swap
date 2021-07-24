@@ -20,5 +20,5 @@ testfunc "./a.out 1" "pb\nlast:(null)\nlen:0\n-\n1\nlast:1\nlen:1\n"
 testfunc "./a.out 1 2" "pb\npb\nlast:(null)\nlen:0\n-\n2\n1\nlast:1\nlen:2\n"
 testfunc "./a.out 1 2 3" "pb\npb\n3\nlast:3\nlen:1\n-\n2\n1\nlast:1\nlen:2\n"
 
-rm a.out
+rm -f a.out
 exit $RTN

@@ -64,6 +64,6 @@ do
 		printf "\e[31m%s\n\e[m" ">> KO!"
 		FLG=1
 	fi
-	rm out
+	rm -f out
 done
 exit $FLG

@@ -71,5 +71,5 @@ printf "\e[1m\e[33m%s\n\e[m" "more reverse"
 testfunc "sa rra rb sb rrb ra sa"	"sa\nrb\nsb\nrrb\nsa\n"
 testfunc "sa rrb ra sa rra rb sa"	"sa\nra\nsa\nrra\nsa\n"
 
-rm leaksout push_swap
+rm -f leaksout push_swap
 exit $FLG
