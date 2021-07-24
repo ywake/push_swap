@@ -5,42 +5,42 @@
 
 enum e_count_opt
 {
-	xa,
-	xb,
-	xx,
-	len,
+	XA,
+	XB,
+	XX,
+	LEN,
 };
 
 enum e_lists_opt
 {
-	start,
-	end,
-	save,
-	list_len,
+	START,
+	END,
+	SAVE,
+	LIST_LEN,
 };
 
-void	s_init(int cnt[len], t_list *lst[list_len], char *str[len], char *cmd)
+void	s_init(int cnt[LEN], t_list *lst[LIST_LEN], char *str[LEN], char *cmd)
 {
-	cnt[xa] = 0;
-	cnt[xb] = 0;
-	lst[start] = NULL;
-	lst[end] = NULL;
+	cnt[XA] = 0;
+	cnt[XB] = 0;
+	lst[START] = NULL;
+	lst[END] = NULL;
 	if (str == NULL)
 		return ;
-	str[xa] = ft_strjoin(cmd, "a");
-	str[xb] = ft_strjoin(cmd, "b");
+	str[XA] = ft_strjoin(cmd, "a");
+	str[XB] = ft_strjoin(cmd, "b");
 	if (ft_strcmp(cmd, "rr") == 0)
-		str[xx] = ft_strjoin(cmd, "r");
+		str[XX] = ft_strjoin(cmd, "r");
 	else
-		str[xx] = ft_strjoin(cmd, cmd);
+		str[XX] = ft_strjoin(cmd, cmd);
 }
 
-void	s_del(char *str[len])
+void	s_del(char *str[LEN])
 {
 	int	i;
 
 	i = 0;
-	while (i < len)
+	while (i < LEN)
 	{
 		free(str[i]);
 		i++;
@@ -49,64 +49,64 @@ void	s_del(char *str[len])
 
 enum	e_abbr
 {
-	prev,
-	mid,
-	abbr_len,
+	PREV,
+	MID,
+	ABBR_LEN,
 };
 
-t_list	*abbr(int cnt[len], t_list *lst[list_len], char *str[len])
+t_list	*abbr(int cnt[LEN], t_list *lst[LIST_LEN], char *str[LEN])
 {
-	t_list	*pos[2];
+	t_list	*pos[ABBR_LEN];
 
-	if (cnt[xa] * cnt[xb] != 0)
+	if (cnt[XA] * cnt[XB] != 0)
 	{
-		pos[mid] = NULL;
-		while (cnt[xa] && cnt[xb] && cnt[xa]-- && cnt[xb]--)
-			add_cmd(&pos[mid], str[xx], "");
-		while (cnt[xa]--)
-			add_cmd(&pos[mid], str[xa], "");
-		while (cnt[xb]--)
-			add_cmd(&pos[mid], str[xb], "");
-		pos[prev] = ft_lst_at(lst[save],
-				ft_lstget_index(lst[save], lst[start]) - 1);
-		if (lst[save] == lst[start])
-			lst[save] = pos[mid];
+		pos[MID] = NULL;
+		while (cnt[XA] && cnt[XB] && cnt[XA]-- && cnt[XB]--)
+			add_cmd(&pos[MID], str[XX], "");
+		while (cnt[XA]--)
+			add_cmd(&pos[MID], str[XA], "");
+		while (cnt[XB]--)
+			add_cmd(&pos[MID], str[XB], "");
+		pos[PREV] = ft_lst_at(lst[SAVE],
+				ft_lstget_index(lst[SAVE], lst[START]) - 1);
+		if (lst[SAVE] == lst[START])
+			lst[SAVE] = pos[MID];
 		else
-			pos[prev]->next = pos[mid];
-		ft_lstadd_back(&pos[mid], lst[end]->next);
-		lst[end]->next = NULL;
-		ft_lstclear(&lst[start], free);
+			pos[PREV]->next = pos[MID];
+		ft_lstadd_back(&pos[MID], lst[END]->next);
+		lst[END]->next = NULL;
+		ft_lstclear(&lst[START], free);
 	}
 	s_init(cnt, lst, NULL, NULL);
-	return (lst[save]);
+	return (lst[SAVE]);
 }
 
 void	search(t_list **cmd, char *cmdstr)
 {
-	int		count[3];
-	t_list	*lst[3];
-	char	*str[3];
-	int		cmp[3];
+	int		count[LEN];
+	t_list	*lst[LIST_LEN];
+	char	*str[LEN];
+	int		cmp[LEN];
 
-	lst[save] = *cmd;
+	lst[SAVE] = *cmd;
 	s_init(count, lst, str, cmdstr);
 	while (*cmd)
 	{
-		cmp[xa] = ft_strcmp((*cmd)->content, str[xa]);
-		cmp[xb] = ft_strcmp((*cmd)->content, str[xb]);
-		if ((!cmp[xa] && ++count[xa]) || (!cmp[xb] && ++count[xb]))
+		cmp[XA] = ft_strcmp((*cmd)->content, str[XA]);
+		cmp[XB] = ft_strcmp((*cmd)->content, str[XB]);
+		if ((!cmp[XA] && ++count[XA]) || (!cmp[XB] && ++count[XB]))
 		{
-			if (lst[start] == NULL)
-				lst[start] = *cmd;
-			lst[end] = *cmd;
+			if (lst[START] == NULL)
+				lst[START] = *cmd;
+			lst[END] = *cmd;
 		}
 		else
-			lst[save] = abbr(count, lst, str);
+			lst[SAVE] = abbr(count, lst, str);
 		*cmd = (*cmd)->next;
 	}
-	lst[save] = abbr(count, lst, str);
+	lst[SAVE] = abbr(count, lst, str);
 	s_del(str);
-	*cmd = lst[save];
+	*cmd = lst[SAVE];
 }
 
 void	optimize(t_list **cmd)

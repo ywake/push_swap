@@ -6,9 +6,9 @@
 
 enum e_stacks
 {
-	st_a,
-	st_b,
-	st_len,
+	AA,
+	BB,
+	ST_LEN,
 };
 
 typedef struct s_stack

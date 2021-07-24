@@ -21,7 +21,7 @@ bool	is_movable(t_state *state, t_list *elem)
 	return (false);
 }
 
-void	small_swap(t_list **cmd, t_stack *st[st_len], int r, enum e_stacks ope)
+void	small_swap(t_list **cmd, t_stack *st[ST_LEN], int r, enum e_stacks ope)
 {
 	t_state	state;
 	t_list	*cmd_tmp;
@@ -31,8 +31,8 @@ void	small_swap(t_list **cmd, t_stack *st[st_len], int r, enum e_stacks ope)
 	cmd_tmp = NULL;
 	state = (t_state){.cmd = &cmd_tmp,
 		.search_max = (int []){0, 1, 3, 5 + ope, 8 + !ope, 10}[r],
-		.sta = st[st_a], .stb = st[st_b], .range = r,
-		.a_next = ft_lst_at(st[st_a]->top, r * !ope)};
+		.sta = st[AA], .stb = st[BB], .range = r,
+		.a_next = ft_lst_at(st[AA]->top, r * !ope)};
 	movable = (t_list *[]){NULL, NULL, NULL, NULL, NULL, NULL};
 	while (r--)
 		movable[r] = ft_lst_at(st[ope]->top, r);

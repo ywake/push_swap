@@ -7,54 +7,54 @@
 
 enum	e_pivot
 {
-	low,
-	high,
-	piv_len,
+	LOW,
+	HIGH,
+	PIV_LEN,
 };
 
 enum	e_count
 {
-	ra,
-	pa,
-	rb,
-	pb,
-	cnt_len,
+	RA,
+	PA,
+	RB,
+	PB,
+	CNT_LEN,
 };
 
-void	init(t_stack *stack, int range, int piv[piv_len], int count[cnt_len])
+void	init(t_stack *stack, int range, int piv[PIV_LEN], int count[CNT_LEN])
 {
 	t_list	*sorted;
 	int		i;
 
 	sorted = ft_lstndup(stack->top, range);
 	ft_lst_sort(&sorted, cmp);
-	piv[low] = ((t_data *)ft_lst_at(sorted, range / 3)->content)->val;
-	piv[high] = ((t_data *)ft_lst_at(sorted, range * 2 / 3)->content)->val;
+	piv[LOW] = ((t_data *)ft_lst_at(sorted, range / 3)->content)->val;
+	piv[HIGH] = ((t_data *)ft_lst_at(sorted, range * 2 / 3)->content)->val;
 	ft_lstclear(&sorted, free);
 	i = 0;
-	while (i < cnt_len)
+	while (i < CNT_LEN)
 	{
 		count[i] = 0;
 		i++;
 	}
 }
 
-void	rewind(t_list **cmd, t_stack *sta, t_stack *stb, int count[cnt_len])
+void	rewind(t_list **cmd, t_stack *sta, t_stack *stb, int count[CNT_LEN])
 {
 	int	i;
 
 	i = 0;
-	while (i < (int)ft_min(count[ra], count[rb]))
+	while (i < (int)ft_min(count[RA], count[RB]))
 	{
 		st_double(cmd, st_rrotate, sta, stb);
 		i++;
 	}
-	while (i < count[ra])
+	while (i < count[RA])
 	{
 		st_rrotate(cmd, sta);
 		i++;
 	}
-	while (i < count[rb])
+	while (i < count[RB])
 	{
 		st_rrotate(cmd, stb);
 		i++;
@@ -63,51 +63,51 @@ void	rewind(t_list **cmd, t_stack *sta, t_stack *stb, int count[cnt_len])
 
 void	push_swap_a(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 {
-	int	pivot[2];
-	int	count[4];
+	int	pivot[PIV_LEN];
+	int	count[CNT_LEN];
 
 	if (range <= 5)
-		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_a));
+		return (small_swap(cmd, (t_stack *[ST_LEN]){sta, stb}, range, AA));
 	init(sta, range, pivot, count);
 	while (range--)
 	{
-		if (get_value(sta->top) >= pivot[high] && ++count[ra])
+		if (get_value(sta->top) >= pivot[HIGH] && ++count[RA])
 			st_rotate(cmd, sta);
 		else
 		{
 			st_push(cmd, stb, sta);
-			count[pb]++;
-			if (get_value(stb->top) >= pivot[low] && ++count[rb])
+			count[PB]++;
+			if (get_value(stb->top) >= pivot[LOW] && ++count[RB])
 				st_rotate(cmd, stb);
 		}
 	}
 	rewind(cmd, sta, stb, count);
-	push_swap_a(cmd, sta, stb, count[ra]);
-	push_swap_b(cmd, sta, stb, count[rb]);
-	push_swap_b(cmd, sta, stb, count[pb] - count[rb]);
+	push_swap_a(cmd, sta, stb, count[RA]);
+	push_swap_b(cmd, sta, stb, count[RB]);
+	push_swap_b(cmd, sta, stb, count[PB] - count[RB]);
 }
 
 void	push_swap_b(t_list **cmd, t_stack *sta, t_stack *stb, int range)
 {
-	int	pivot[2];
-	int	count[4];
+	int	pivot[PIV_LEN];
+	int	count[CNT_LEN];
 
 	if (range <= 5)
-		return (small_swap(cmd, (t_stack *[st_len]){sta, stb}, range, st_b));
+		return (small_swap(cmd, (t_stack *[ST_LEN]){sta, stb}, range, BB));
 	init(stb, range, pivot, count);
 	while (range--)
 	{
-		if (get_value(stb->top) < pivot[low] && ++count[rb])
+		if (get_value(stb->top) < pivot[LOW] && ++count[RB])
 			st_rotate(cmd, stb);
-		else if (true && ++count[pa])
+		else if (true && ++count[PA])
 		{
 			st_push(cmd, sta, stb);
-			if (get_value(sta->top) < pivot[high] && ++count[ra])
+			if (get_value(sta->top) < pivot[HIGH] && ++count[RA])
 				st_rotate(cmd, sta);
 		}
 	}
-	push_swap_a(cmd, sta, stb, count[pa] - count[ra]);
+	push_swap_a(cmd, sta, stb, count[PA] - count[RA]);
 	rewind(cmd, sta, stb, count);
-	push_swap_a(cmd, sta, stb, count[ra]);
-	push_swap_b(cmd, sta, stb, count[rb]);
+	push_swap_a(cmd, sta, stb, count[RA]);
+	push_swap_b(cmd, sta, stb, count[RB]);
 }

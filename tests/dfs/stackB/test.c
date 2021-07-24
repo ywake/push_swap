@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	stb.btm = ft_lstlast(stb.top);
 	cmd = NULL;
 	put_stack(&sta, &stb);
-	small_swap(&cmd, (t_stack *[2]){&sta, &stb}, stb.len - 1, st_b);
+	small_swap(&cmd, (t_stack *[ST_LEN]){&sta, &stb}, stb.len - 1, BB);
 	put_stack(&sta, &stb);
 	ft_lst_reverse(&cmd);
 	ft_putnbr_fd(ft_lstsize(cmd), 2);

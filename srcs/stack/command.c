@@ -9,21 +9,21 @@ bool	do_cmd(t_list **cmds, t_stack **st, char **valid_list, char *cmd)
 	if (cmds != NULL)
 		add_cmd(cmds, cmd, "");
 	if (contain((char *[]){"sa", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, st[st_a]);
+		st_swap(NULL, st[AA]);
 	if (contain((char *[]){"sb", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, st[st_b]);
+		st_swap(NULL, st[BB]);
 	if (!ft_strcmp("pa", cmd))
-		st_push(NULL, st[st_a], st[st_b]);
+		st_push(NULL, st[AA], st[BB]);
 	if (!ft_strcmp("pb", cmd))
-		st_push(NULL, st[st_b], st[st_a]);
+		st_push(NULL, st[BB], st[AA]);
 	if (contain((char *[]){"ra", "rr", NULL}, cmd) + 1)
-		st_rotate(NULL, st[st_a]);
+		st_rotate(NULL, st[AA]);
 	if (contain((char *[]){"rb", "rr", NULL}, cmd) + 1)
-		st_rotate(NULL, st[st_b]);
+		st_rotate(NULL, st[BB]);
 	if (contain((char *[]){"rra", "rrr", NULL}, cmd) + 1)
-		st_rrotate(NULL, st[st_a]);
+		st_rrotate(NULL, st[AA]);
 	if (contain((char *[]){"rrb", "rrr", NULL}, cmd) + 1)
-		st_rrotate(NULL, st[st_b]);
+		st_rrotate(NULL, st[BB]);
 	return (true);
 }
 
@@ -34,21 +34,21 @@ bool	undo_cmd(t_list **cmds, t_stack **st, char **vald_list, char *cmd)
 	if (cmds)
 		ft_lstdrop(cmds, *cmds, free);
 	if (contain((char *[]){"sa", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, st[st_a]);
+		st_swap(NULL, st[AA]);
 	if (contain((char *[]){"sb", "ss", NULL}, cmd) + 1)
-		st_swap(NULL, st[st_b]);
+		st_swap(NULL, st[BB]);
 	if (!ft_strcmp("pa", cmd))
-		st_push(NULL, st[st_b], st[st_a]);
+		st_push(NULL, st[BB], st[AA]);
 	if (!ft_strcmp("pb", cmd))
-		st_push(NULL, st[st_a], st[st_b]);
+		st_push(NULL, st[AA], st[BB]);
 	if (contain((char *[]){"ra", "rr", NULL}, cmd) + 1)
-		st_rrotate(NULL, st[st_a]);
+		st_rrotate(NULL, st[AA]);
 	if (contain((char *[]){"rb", "rr", NULL}, cmd) + 1)
-		st_rrotate(NULL, st[st_b]);
+		st_rrotate(NULL, st[BB]);
 	if (contain((char *[]){"rra", "rrr", NULL}, cmd) + 1)
-		st_rotate(NULL, st[st_a]);
+		st_rotate(NULL, st[AA]);
 	if (contain((char *[]){"rrb", "rrr", NULL}, cmd) + 1)
-		st_rotate(NULL, st[st_b]);
+		st_rotate(NULL, st[BB]);
 	return (true);
 }
 
