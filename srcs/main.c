@@ -12,7 +12,7 @@ void	print(void *str)
 	ft_putendl_fd((char *)str, 1);
 }
 
-void	init_stacks(t_stack *stack, char *name, t_list *list, int len)
+void	init_stack(t_stack *stack, char *name, t_list *list, int len)
 {
 	stack->name = name;
 	stack->top = list;
@@ -29,8 +29,8 @@ int	main(int argc, char *argv[])
 	cmd = NULL;
 	if (argc == 1)
 		return (0);
-	init_stacks(&sta, "a", make_data(argc, argv), argc - 1);
-	init_stacks(&stb, "b", NULL, 0);
+	init_stack(&sta, "a", make_data(argc, argv), argc - 1);
+	init_stack(&stb, "b", NULL, 0);
 	if (!is_sorted(&sta, -1, asc))
 		push_swap_a(&cmd, &sta, &stb, sta.len);
 	ft_lst_reverse(&cmd);

@@ -37,23 +37,25 @@ bool	has_mean(char *cmd, char *next)
 {
 	char	**next_ng;
 
+	if (cmd == NULL)
+		return (true);
 	next_ng = (char *[]){"sa", "sb", "ss", NULL};
-	if ((cmd && !ft_strcmp(cmd, "sa") && contain(next_ng, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "sb") && contain(next_ng, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "ss") && contain(next_ng, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "pa") && !ft_strcmp(next, "pb"))
-		|| (cmd && !ft_strcmp(cmd, "pb") && !ft_strcmp(next, "pa"))
-		|| (cmd && !ft_strcmp(cmd, "ra") && \
+	if ((!ft_strcmp(cmd, "sa") && contain(next_ng, next) + 1)
+		|| (!ft_strcmp(cmd, "sb") && contain(next_ng, next) + 1)
+		|| (!ft_strcmp(cmd, "ss") && contain(next_ng, next) + 1)
+		|| (!ft_strcmp(cmd, "pa") && !ft_strcmp(next, "pb"))
+		|| (!ft_strcmp(cmd, "pb") && !ft_strcmp(next, "pa"))
+		|| (!ft_strcmp(cmd, "ra") && \
 			contain((char *[]){"rb", "rra", "rrr", NULL}, next) + 1)
-		|| (cmd && (!ft_strcmp(cmd, "rb") && \
-			contain((char *[]){"ra", "rrb", "rrr", NULL}, next) + 1))
-		|| (cmd && !ft_strcmp(cmd, "rr") && \
+		|| (!ft_strcmp(cmd, "rb") && \
+			contain((char *[]){"ra", "rrb", "rrr", NULL}, next) + 1)
+		|| (!ft_strcmp(cmd, "rr") && \
 			contain((char *[]){"rrr", "rra", "rrb", NULL}, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "rra") && \
+		|| (!ft_strcmp(cmd, "rra") && \
 			contain((char *[]){"rrb", "ra", "rr", NULL}, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "rrb") && \
+		|| (!ft_strcmp(cmd, "rrb") && \
 			contain((char *[]){"rra", "rb", "rr", NULL}, next) + 1)
-		|| (cmd && !ft_strcmp(cmd, "rrr") && \
+		|| (!ft_strcmp(cmd, "rrr") && \
 			contain((char *[]){"rr", "ra", "rb", NULL}, next) + 1))
 		return (false);
 	return (true);

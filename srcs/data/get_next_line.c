@@ -28,6 +28,8 @@ int	get_next_line(int fd, char **line)
 	char		*ptr;
 	ssize_t		rtn;
 
+	if (line == NULL)
+		return (-1);
 	if (set_rtn(&rdbuf, malloc(BUFFER_SIZE + 1)) == NULL)
 		return (myabort(rdbuf, NULL, NULL));
 	*line = *remain;
