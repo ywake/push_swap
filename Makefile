@@ -17,7 +17,7 @@ B_SRCS	:= checker/main.c error.c debug.c \
 			stack/stack.c stack/stack2.c stack/command.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 
-.PHONY: all clean fclean re bonus test
+.PHONY: all clean fclean re norm bonus bonus_leak test
 
 all: $(NAME)
 
@@ -45,11 +45,13 @@ fclean: clean
 	rm -f libft.a
 	rm -f out out_checker err leaksout
 	rm -f $(NAME) $(B_NAME)
+	rm -rf $(NAME).dSYM $(B_NAME).dSYM a.out.dSYM
 
 re: fclean all
 
 norm:
-	@printf "\e[31m"; norminette srcs includes Libft tests/**/test.c | grep -v ": OK!" \
+	@printf "\e[31m"; norminette | grep -v -e ": OK!" -v -e "Missing or invalid header. Header are being reintroduced as a mandatory part of your files. This is not yet an error." \
+    && exit 1 \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
 leak: $(LIBFT) $(OBJS)
