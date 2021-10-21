@@ -55,10 +55,10 @@ norm:
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"; printf "\e[m"
 
 leak: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) ./tests/sharedlib.c -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) ./tests/destructor.c -o $(NAME) $(LIBS)
 
 bonus_leak: $(LIBFT) $(B_OBJS)
-	$(CC) $(CFLAGS) $(B_OBJS) ./tests/sharedlib_checker.c -o $(B_NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(B_OBJS) ./tests/destructor.c -o $(B_NAME) $(LIBS)
 
 autotest: $(LIBFT)
 	bash auto_test.sh $(TEST)\
