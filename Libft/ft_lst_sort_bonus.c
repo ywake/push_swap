@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:21:21 by ywake             #+#    #+#             */
-/*   Updated: 2021/06/17 22:08:20 by ywake            ###   ########.fr       */
+/*   Updated: 2021/10/23 10:28:04 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_list	*ft_lst_sort_re(t_list *left, int size, int (*cmp)())
 	ans = NULL;
 	while (left || right)
 	{
-		if (left && (!right || cmp(left->content, right->content) <= 0))
+		if (left && (!right || cmp(left->content, right->content)))
 			left = lstadd_back_quick(&ans, left, &tmp);
 		else
 			right = lstadd_back_quick(&ans, right, &tmp);
@@ -50,6 +50,11 @@ static t_list	*ft_lst_sort_re(t_list *left, int size, int (*cmp)())
 	return (ans);
 }
 
+/**
+ * Merge sort
+ * @param cmp	If true(!= 0) is returned, it will connect first.
+ * And if false(== 0) is returned, it will wait for the next comparison.
+ */
 void	ft_lst_sort(t_list **list, int (*cmp)())
 {
 	int	size;

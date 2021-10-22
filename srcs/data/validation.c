@@ -4,7 +4,7 @@
 
 int	cmp(t_data *a, t_data *b)
 {
-	return (a->val - b->val);
+	return (a->val < b->val);
 }
 
 bool	is_valid_num(char *str1)
