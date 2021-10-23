@@ -3,7 +3,7 @@ SRCS="./srcs/data/data.c ./srcs/data/validation.c ./srcs/error.c ./tests/make_da
 LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
-gcc -o push_swap -g $INCLUDES $SRCS ./tests/sharedlib.c $LIBS
+gcc -o push_swap -g $INCLUDES $SRCS ./tests/destructor.c $LIBS
 if [ $? -ne 0 ]; then
 	exit 1
 fi
@@ -11,12 +11,15 @@ fi
 RTN=0
 function testfunc() {
 	echo "$1"
-	diff <(./push_swap $1) <(echo -en $2)
+	diff <(./push_swap $1) <(echo -en $2) > /dev/null
 	if [ $? -eq 0 ]; then
 		printf "\e[32m%s\n\e[m" ">> OK!"
 	else
-		printf "\e[31m%s\n\e[m" ">> KO!"
-		./push_swap $1 > /dev/stderr
+		printf "\e[31m%s\n" ">> KO!"
+		printf	"%37s | %s\n" "actuary" "expect"
+		python3 -c 'print("-" * 38 + "+" + "-" * 38)'
+		diff -y -W 79 <(./push_swap $1) <(echo -en $2)
+		printf "\e[m"
 		RTN=1
 	fi
 }

@@ -3,7 +3,7 @@ SRCS="./srcs/opt/optimize.c ./srcs/stack/stack.c ./srcs/error.c ./srcs/debug.c .
 LIBS="-L. -lft"
 
 echo "> gcc -g $INCLUDES $SRCS $LIBS"
-gcc -o push_swap -g $INCLUDES $SRCS ./tests/sharedlib.c $LIBS
+gcc -o push_swap -g $INCLUDES $SRCS ./tests/destructor.c $LIBS
 if [ $? -ne 0 ]; then
 	exit 1
 fi
